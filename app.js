@@ -1,8 +1,8 @@
-const userScore = 0;
-const computerScore = 0;
+let userScore = 0;
+let computerScore = 0;
 const userScore_span = document.getElementById('user-score');
 const computerScore_span = document.getElementById('computer-score');
-const result_div = document.querySelector('.result');
+const result_p = document.querySelector('.result > p');
 const rock_div = document.getElementById('r');
 const paper_div = document.getElementById('p');
 const scissors_div = document.getElementById('s');
@@ -14,7 +14,29 @@ function getComputerChoice() {
     return choices[randomNumber];
 
 }
-console.log(getComputerChoice())
+
+function convertToWord(letter) {
+    if (letter === 'r') return 'Rock';
+    if (letter === 'p') return 'Paper';
+    return 'Scissors'
+}
+function win(userChoice, computerChoice) {
+    //increase user score
+    userScore++;
+    //show user score
+    userScore_span.innerHTML = userScore;
+    //show user win
+    //result_p = `${convertToWord(userChoice)} beats ${convertToWord(computerChoice)} You win`
+
+}
+function lose(userChoice, computerChoice) {
+    //increase computer score
+    computerScore++;
+    //show computer score
+    computerScore_span.innerHTML = computerScore;
+    //show user win
+    //result_p = `${convertToWord(userChoice)} beats ${convertToWord(computerChoice)} You win`
+}
 
 function game(userChoice) {
     const computerChoice = getComputerChoice();
@@ -22,16 +44,19 @@ function game(userChoice) {
         case 'rs':
         case 'pr':
         case 'sp':
+            win(userChoice, computerChoice);
             console.log("user wins");
             break;
         case 'rp':
         case 'ps':
         case 'sr':
+            lose();
             console.log('user loses');
             break;
         case 'rr':
         case 'pp':
         case 'ss':
+            draw();
             console.log('tie');
             break;
     }
